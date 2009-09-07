@@ -1,10 +1,12 @@
-require 'pathname'
-require 'rubygems'
-
-gem 'dm-core', '0.10.0'
+# use local dm-core if running from a typical dev checkout.
+lib = File.join('..', '..', 'dm-core', 'lib')
+$LOAD_PATH.unshift(lib) if File.directory?(lib)
 require 'dm-core'
 
-require Pathname(__FILE__).dirname.parent / 'lib' / 'dm-ar-finders'
+# Support running specs with 'rake spec' and 'spec'
+$LOAD_PATH.unshift(File.join('lib'))
+
+require 'dm-ar-finders'
 
 def load_driver(name, default_uri)
   return false if ENV['ADAPTER'] != name.to_s
@@ -12,10 +14,6 @@ def load_driver(name, default_uri)
   begin
     DataMapper.setup(name, ENV["#{name.to_s.upcase}_SPEC_URI"] || default_uri)
     DataMapper::Repository.adapters[:default] =  DataMapper::Repository.adapters[name]
-
-    FileUtils.touch LOG_PATH
-    DataMapper::Logger.new(LOG_PATH, :debug)
-    at_exit { DataMapper.logger.close }
     true
   rescue LoadError => e
     warn "Could not load do_#{name}: #{e}"
@@ -24,7 +22,7 @@ def load_driver(name, default_uri)
 end
 
 ENV['ADAPTER'] ||= 'sqlite3'
-LOG_PATH     = Pathname(__FILE__).dirname / 'sql.log'
+
 HAS_SQLITE3  = load_driver(:sqlite3,  'sqlite3::memory:')
 HAS_MYSQL    = load_driver(:mysql,    'mysql://localhost/dm_core_test')
 HAS_POSTGRES = load_driver(:postgres, 'postgres://postgres@localhost/dm_core_test')
