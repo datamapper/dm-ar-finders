@@ -2,19 +2,35 @@ require 'dm-core'
 
 module DataMapper
   module Model
-    # Lookup the resource by the primary key
+    # Lookup the resource or resources
     #
-    # @param [Integer] id
-    #   the primary key value for the resource
+    # @param [Integer, Symbol] symbol_or_id
+    #   either a symbol (:first, :last, or :all) or the primary key value for
+    #   the resource the primary key value for the resource
+    #
+    # @overload find(id)
+    #   @param [Integer] id
+    #     the primary key value for the resource
+    #
+    # @overload find(symbol)
+    #   @param [Symbol] symbol
+    #     either :first, :last, or :all
     #
     # @return [Resource]
-    #   the resource that was found
+    #   A collection containing all records for this model if asked for :all
+    # @return [DataMapper::Collection]
+    #   the resource that was found if given an ID or asked for :first or :last.
     # @return [nil]
     #   nil if no resource was found
     #
     # @api public
-    def find(id)
-      get(id)
+    def find(symbol_or_id)
+      case symbol_or_id
+        when :first then first
+        when :last  then last
+        when :all   then all
+        else             get(symbol_or_id)
+      end
     end
 
     # Find resources by providing your own SQL query or DataMapper::Query

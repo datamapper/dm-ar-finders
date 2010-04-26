@@ -47,6 +47,29 @@ if HAS_SQLITE3 || HAS_MYSQL || HAS_POSTGRES
     ###
 
     describe '#find' do
+      describe 'when given a symbol' do
+        before :each do
+          @green_smoothie = GreenSmoothie.create(:name => 'Banana')
+          @green_smoothie2 = GreenSmoothie.create(:name => 'Banana')
+        end
+
+        it 'should return all records when asked for :all' do
+          found_records = GreenSmoothie.find(:all)
+          found_records.length.should == 2
+          found_records.each do |found_record|
+            [@green_smoothie, @green_smoothie2].include?(found_record).should be_true
+          end
+        end
+
+        it 'should return the first record when asked for :first' do
+          GreenSmoothie.find(:first).should == @green_smoothie
+        end
+
+        it 'should return the last record when asked for :last' do
+          GreenSmoothie.find(:last).should == @green_smoothie2
+        end
+      end
+      
       describe 'with a valid key' do
         before :all do
           @resource = GreenSmoothie.create(:name => 'Banana')
