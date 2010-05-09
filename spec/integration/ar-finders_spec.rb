@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-if HAS_SQLITE3 || HAS_MYSQL || HAS_POSTGRES
-  describe "DataMapper::Resource" do
-    after do
-     DataMapper.repository(:default).adapter.execute('DELETE from green_smoothies');
-    end
+describe "DataMapper::Resource" do
 
-    before(:all) do
-      class ::GreenSmoothie
-        include DataMapper::Resource
-        property :id, Serial
-        property :name, String
-
-        auto_migrate!(:default)
-      end
+  before(:all) do
+    class ::GreenSmoothie
+      include DataMapper::Resource
+      property :id, Serial
+      property :name, String
     end
+  end
+
+  after do
+   DataMapper.repository(:default).adapter.execute('DELETE from green_smoothies');
+  end
+
+  supported_by :all do
 
     it "should find/create using find_or_create" do
       DataMapper.repository(:default) do
@@ -160,12 +160,16 @@ if HAS_SQLITE3 || HAS_MYSQL || HAS_POSTGRES
       # Options.
 
       describe ':repository option' do
-        it 'should use repository identified by the given symbol' do
-          found = GreenSmoothie.find_by_sql <<-SQL, :repository => ENV['ADAPTER'].intern
-            SELECT id, name FROM green_smoothies LIMIT 1
-          SQL
 
-          found.repository.should == DataMapper.repository(ENV['ADAPTER'].intern)
+        with_alternate_adapter do
+          it 'should use repository identified by the given symbol' do
+            alternate_repository = DataMapper::Spec.spec_adapters[:alternate].name
+            found = GreenSmoothie.find_by_sql <<-SQL, :repository => alternate_repository
+              SELECT id, name FROM green_smoothies LIMIT 1
+            SQL
+
+            found.repository.should == DataMapper.repository(alternate_repository)
+          end
         end
 
         it 'should use the default repository if no repository option is specified' do
@@ -286,4 +290,5 @@ if HAS_SQLITE3 || HAS_MYSQL || HAS_POSTGRES
     end # find_by_sql
 
   end
+
 end
