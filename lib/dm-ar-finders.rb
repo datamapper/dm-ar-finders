@@ -115,7 +115,7 @@ module DataMapper
         properties = self.properties(repository.name)
       end
 
-      unless repository.adapter.kind_of?(Adapters::DataObjectsAdapter)
+      unless defined?(Adapters::DataObjectsAdapter) && repository.adapter.kind_of?(Adapters::DataObjectsAdapter)
         raise '#find_by_sql only available for Repositories served by a DataObjectsAdapter'
       end
 
