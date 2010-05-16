@@ -11,7 +11,7 @@ describe "DataMapper::Resource" do
   end
 
   after do
-   DataMapper.repository(:default).adapter.execute('DELETE from green_smoothies');
+    GreenSmoothie.all.destroy!
   end
 
   supported_by :all do
@@ -94,6 +94,10 @@ describe "DataMapper::Resource" do
         end
       end
     end
+
+  end
+
+  supported_by :sqlite, :mysql, :postgres do
 
     describe '#find_by_sql' do
       before(:each) do
