@@ -69,7 +69,7 @@ describe "DataMapper::Resource" do
           GreenSmoothie.find(:last).should == @green_smoothie2
         end
       end
-      
+
       describe 'with a valid key' do
         before :all do
           @resource = GreenSmoothie.create(:name => 'Banana')
