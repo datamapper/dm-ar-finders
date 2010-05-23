@@ -10,7 +10,7 @@ begin
     gem.summary     = 'DataMapper plugin providing ActiveRecord-style finders'
     gem.description = gem.summary
     gem.email       = 'john [a] wishVPS [d] com'
-    gem.homepage    = 'http://github.com/datamapper/dm-more/tree/master/%s' % gem.name
+    gem.homepage    = 'http://github.com/datamapper/%s' % gem.name
     gem.authors     = [ 'John W Higgins' ]
 
     gem.rubyforge_project = 'datamapper'

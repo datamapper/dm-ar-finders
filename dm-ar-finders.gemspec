@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W Higgins"]
-  s.date = %q{2010-05-19}
+  s.date = %q{2010-05-23}
   s.description = %q{DataMapper plugin providing ActiveRecord-style finders}
   s.email = %q{john [a] wishVPS [d] com}
   s.extra_rdoc_files = [
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
      "tasks/yard.rake",
      "tasks/yardstick.rake"
   ]
-  s.homepage = %q{http://github.com/datamapper/dm-more/tree/master/dm-ar-finders}
+  s.homepage = %q{http://github.com/datamapper/dm-ar-finders}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{datamapper}
