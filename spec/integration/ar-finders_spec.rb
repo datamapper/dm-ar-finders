@@ -39,7 +39,7 @@ describe "DataMapper::Resource" do
         found_records = GreenSmoothie.find_all_by_name('Banana')
         found_records.length.should == 2
         found_records.each do |found_record|
-          [green_smoothie, green_smoothie2].include?(found_record).should be_true
+          [green_smoothie, green_smoothie2].include?(found_record).should be(true)
         end
       end
     end
@@ -57,7 +57,7 @@ describe "DataMapper::Resource" do
           found_records = GreenSmoothie.find(:all)
           found_records.length.should == 2
           found_records.each do |found_record|
-            [@green_smoothie, @green_smoothie2].include?(found_record).should be_true
+            [@green_smoothie, @green_smoothie2].include?(found_record).should be(true)
           end
         end
 
@@ -191,7 +191,7 @@ describe "DataMapper::Resource" do
             SELECT id, name FROM green_smoothies LIMIT 1
           SQL
 
-          found.query.reload?.should be_true
+          found.query.reload?.should be(true)
         end
 
         it 'should not reload existing resources in the identity map if given false' do
@@ -199,7 +199,7 @@ describe "DataMapper::Resource" do
             SELECT id, name FROM green_smoothies LIMIT 1
           SQL
 
-          found.query.reload?.should be_false
+          found.query.reload?.should be(false)
         end
 
         it 'should default to false' do
@@ -207,7 +207,7 @@ describe "DataMapper::Resource" do
             SELECT id, name FROM green_smoothies LIMIT 1
           SQL
 
-          found.query.reload?.should be_false
+          found.query.reload?.should be(false)
         end
       end
 
