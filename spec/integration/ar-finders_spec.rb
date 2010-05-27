@@ -11,7 +11,7 @@ describe "DataMapper::Resource" do
   end
 
   after do
-    GreenSmoothie.all.destroy!
+    GreenSmoothie.destroy!
   end
 
   supported_by :all do
