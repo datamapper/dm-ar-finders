@@ -140,8 +140,8 @@ module DataMapper
       Collection.new(query, query.model.load(records, query))
     end
 
-    alias find_or_create     first_or_create
-    alias find_or_initialize first_or_new
+    alias_method :find_or_create,     :first_or_create
+    alias_method :find_or_initialize, :first_or_new
 
     private
 
