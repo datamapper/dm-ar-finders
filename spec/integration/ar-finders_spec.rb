@@ -8,6 +8,13 @@ describe "DataMapper::Resource" do
       property :id, Serial
       property :name, String
     end
+
+    class ::Milkshake
+      include DataMapper::Resource
+      property :id,               Serial
+      property :name,             String,  :field => 'ml_name'
+      property :contains_lactose, Boolean, :field => 'bl_lactose'
+    end
   end
 
   after do
@@ -159,6 +166,19 @@ describe "DataMapper::Resource" do
         found = GreenSmoothie.find_by_sql(query)
         found.should_not be_empty
         found.first.should == @resource
+      end
+
+      it 'should respect the property field option and map appropriately when custom field names are specified' do
+        milkshake = Milkshake.new(:name => 'strawberry', :contains_lactose => true)
+        milkshake.save
+
+        found_by_first = Milkshake.first
+        found_by_sql   = Milkshake.find_by_sql(<<-SQL
+          SELECT * FROM milkshakes LIMIT 1
+        SQL
+        )
+
+        found_by_first.should == found_by_sql.first
       end
 
       # Options.

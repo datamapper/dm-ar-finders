@@ -123,7 +123,7 @@ module DataMapper
 
       repository.adapter.send(:with_connection) do |connection|
         reader = connection.create_command(sql).execute_reader(*bind_values)
-        fields = properties.values_at(*reader.fields).compact
+        fields = properties.field_map.values_at(*reader.fields).compact
 
         begin
           while reader.next!
