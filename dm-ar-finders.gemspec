@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W Higgins"]
-  s.date = %q{2010-09-07}
+  s.date = %q{2010-11-26}
   s.description = %q{DataMapper plugin providing ActiveRecord-style finders}
   s.email = %q{john [a] wishVPS [d] com}
   s.extra_rdoc_files = [
@@ -29,9 +29,6 @@ Gem::Specification.new do |s|
      "spec/rcov.opts",
      "spec/spec.opts",
      "spec/spec_helper.rb",
-     "tasks/ci.rake",
-     "tasks/local_gemfile.rake",
-     "tasks/metrics.rake",
      "tasks/spec.rake",
      "tasks/yard.rake",
      "tasks/yardstick.rake"
