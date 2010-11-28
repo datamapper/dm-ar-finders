@@ -102,7 +102,7 @@ module DataMapper
 
       if options.key?(:properties)
         if options[:properties].kind_of?(DataMapper::PropertySet)
-          properties = Array(options[:properties])
+          properties = options[:properties]
         else
           # Normalize properties into PropertySet[Property].
           properties = Array(options[:properties]).map! do |prop|
