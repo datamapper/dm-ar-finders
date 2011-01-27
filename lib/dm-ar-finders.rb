@@ -75,12 +75,12 @@ module DataMapper
     #   MyClass.find_by_sql("SELECT id FROM my_classes LIMIT 1")
     #
     # @example Query with properties option
-    #   MyClass.find_by_sql("SELECT id FROM my_classes LIMIT 1",
+    #   MyClass.find_by_sql("SELECT id, name FROM my_classes LIMIT 1",
     #     :properties => [:id, :name])
     #
     # @example Query with repository
     #   MyClass.find_by_sql(["SELECT id FROM my_classes WHERE county = ?",
-    #     selected_county], :properties => MyClass.property[:name],
+    #     selected_county], :properties => MyClass.property[:id],
     #     :repository => :county_repo)
     #
     # @api public
