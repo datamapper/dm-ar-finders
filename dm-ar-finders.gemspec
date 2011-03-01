@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dm-ar-finders}
-  s.version = "1.0.2"
+  s.version = "1.1.0.rc1"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W Higgins"]
-  s.date = %q{2011-02-27}
+  s.date = %q{2011-02-28}
   s.description = %q{DataMapper plugin providing ActiveRecord-style finders}
   s.email = %q{john [a] wishVPS [d] com}
   s.extra_rdoc_files = [
