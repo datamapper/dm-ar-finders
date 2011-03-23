@@ -127,7 +127,7 @@ module DataMapper
 
         begin
           while reader.next!
-            records << DataMapper::Ext::Array.to_hash(fields.zip(reader.values))
+            records << Hash[ fields.zip(reader.values) ]
           end
         ensure
           reader.close
@@ -150,7 +150,7 @@ module DataMapper
         finder          = determine_finder(match)
         attribute_names = extract_attribute_names_from_match(match)
 
-        send(finder, DataMapper::Ext::Array.to_hash(attribute_names.zip(args)))
+        send(finder, Hash[ attribute_names.zip(args) ])
       else
         method_missing_without_find_by(method, *args, &block)
       end
