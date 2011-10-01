@@ -92,7 +92,7 @@ module DataMapper
       when String
         sql, bind_values = sql_or_query, []
       when DataMapper::Query
-        sql, bind_values = repository.adapter.send(:select_statement, query)
+        sql, bind_values = repository.adapter.send(:select_statement, sql_or_query)
       else
         raise ArgumentError, '#find_by_sql requires a query of some kind to work'
       end
